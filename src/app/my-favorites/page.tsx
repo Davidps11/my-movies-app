@@ -3,13 +3,12 @@ import React, { useEffect, useState } from "react";
 import MovieList from "@/components/MovieList/MovieList";
 import { getFavoriteMovies } from "@/services/accounts/getFavoriteMovies";
 import { useGuestSession } from "@/providers/GuestSessionContext";
-import { IMovieDetail } from "@/types/IMovieDetail";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const MyFavoritesPage = () => {
   const { guestSessionId } = useGuestSession();
   const [loading, setLoading] = useState<boolean>(false);
-  const [movies, setMovies] = useState<IMovieDetail[]>([]);
+  const [movies, setMovies] = useState<any[]>([]);
   const searchParams = useSearchParams();
   const router = useRouter();
   const page = parseInt(searchParams.get("page") || "1");
@@ -53,11 +52,11 @@ const MyFavoritesPage = () => {
           <MovieList movies={movies} from="favorites" />
           <div className="flex justify-center gap-4 mt-6">
             <button onClick={() => router.push(`?page=${page - 1}`)} disabled={page <= 1} className="px-4 py-2 bg-gray-300 rounded">
-              ⬅️ Anterior
+               Anterior
             </button>
             <span className="self-center">Página {page}</span>
             <button onClick={() => router.push(`?page=${page + 1}`)} className="px-4 py-2 bg-gray-300 rounded">
-              Siguiente ➡️
+              Siguiente
             </button>
           </div>
         </>
